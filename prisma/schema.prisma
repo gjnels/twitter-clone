@@ -10,11 +10,12 @@ datasource db {
 
 // Lucia Auth
 model AuthUser {
-  id           String        @id @unique
-  auth_session AuthSession[]
-  auth_key     AuthKey[]
-  username     String
-  avatar       String
+  id              String        @id @unique
+  auth_session    AuthSession[]
+  auth_key        AuthKey[]
+  discordUserId   String
+  discordUsername String
+  discordAvatar   String
 
   @@map("auth_user")
 }
