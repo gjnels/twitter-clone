@@ -17,6 +17,12 @@ model AuthUser {
   discordUsername String
   discordAvatar   String
 
+  // Non-auth
+  tweets    Tweet[]
+  likes     Like[]
+  followers AuthUser[] @relation(name: "Followers")
+  follows   AuthUser[] @relation(name: "Followers")
+
   @@map("auth_user")
 }
 
@@ -41,4 +47,29 @@ model AuthKey {
 
   @@index([user_id])
   @@map("auth_key")
+}
+
+// Tweets
+model Tweet {
+  id        String   @id @unique @default(cuid())
+  userId    String
+  content   String   @db.VarChar(240)
+  createdAt DateTime @default(now())
+  likes     Like[]
+
+  user AuthUser @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Like {
+  tweetId String
+  userId  String
+
+  tweet Tweet    @relation(references: [id], fields: [tweetId], onDelete: Cascade)
+  user  AuthUser @relation(references: [id], fields: [userId], onDelete: Cascade)
+
+  @@id([tweetId, userId])
+  @@index([userId])
+  @@index([tweetId])
 }
