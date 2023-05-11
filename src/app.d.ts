@@ -1,14 +1,16 @@
+import type { PrismaClient } from '@prisma/client'
+
 declare global {
   namespace App {
     interface Locals {
       auth: import('lucia-auth').AuthRequest
     }
   }
-}
 
-/// <reference types="lucia-auth" />
-declare global {
-  namespace Lucia {
+  let __prisma: PrismaClient
+
+  /// <reference types="lucia-auth" />
+  declare namespace Lucia {
     type Auth = import('$lib/lucia').Auth
     type UserAttributes = {
       discordUserId: string

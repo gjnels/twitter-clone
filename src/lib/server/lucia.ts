@@ -1,9 +1,9 @@
 import lucia from 'lucia-auth'
 import { sveltekit } from 'lucia-auth/middleware'
 import prismaAdapter from '@lucia-auth/adapter-prisma'
-import { dev } from '$app/environment'
-import { prisma } from './prisma'
 import { discord } from '@lucia-auth/oauth/providers'
+import { prisma } from '$lib/server/prisma'
+import { dev } from '$app/environment'
 import {
   DISCORD_CLIENT_ID,
   DISCORD_CLIENT_REDIRECT_URI,

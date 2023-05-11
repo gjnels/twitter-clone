@@ -6,4 +6,6 @@
   <title>Twitter Clone</title>
 </svelte:head>
 
-<slot />
+<main class="p-6">
+  <slot />
+</main>
